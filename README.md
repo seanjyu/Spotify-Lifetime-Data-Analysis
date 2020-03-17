@@ -10,3 +10,4 @@ The dates of interest can be changed in the code. The average rating is also plo
 Plots may not show up initially however once the slider is moved data should appear.
 
 Below is an image of an example plot.
+![](images/image1.png)
