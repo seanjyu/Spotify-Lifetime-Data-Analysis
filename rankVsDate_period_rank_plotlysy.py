@@ -13,6 +13,7 @@ from itertools import repeat
 from plotly.offline import init_notebook_mode, iplot
 import plotly.io as pio
 import dash_core_components as dcc
+import warnings
 init_notebook_mode()
 
 # Choose Rankings
@@ -77,7 +78,6 @@ def plotbbdata(rankLow,rankHigh,startPeriod,endPeriod):
         for i in range(len(songDate)-1):
             div=int((x[i+1]-x[i]).days/7)
             if div != 1:
-                #print(x[i+1]-[i],x[i]-[i-1])
                 xabs1=list(range(int(div)))
                 a=int((x[i]-x[0]).days/7)
                 xabs1=[str(z+a+1) for z in xabs1]
@@ -124,7 +124,12 @@ def plotbbdata(rankLow,rankHigh,startPeriod,endPeriod):
     ysd=[]
     for k in range(len(ally)):
         row=np.array(list(ally.iloc[k,:])).astype(np.float)
-        mean=np.nanmean(row)
+        if len(row)>=1:
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore", category=RuntimeWarning)
+            mean=np.nanmean(row)
+        else:
+            mean=float('nan')
         sd=np.nanstd(row)
         meany.append(mean)
         ysd.append(sd)
@@ -203,8 +208,8 @@ def incrementTime(ti):
     return rereadTime(ti) + dt.timedelta(days=365)
 
 # choose dates to get plots
-startdate="1988-01-01"
-enddate="1990-01-01"
+startdate="2012-01-01"
+enddate="2014-01-01"
 
 # turn dates into date time
 date=startdate
