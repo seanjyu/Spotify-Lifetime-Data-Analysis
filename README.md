@@ -1,4 +1,4 @@
-# spotify lifetime data analysis
+# Spotify Lifetime Data Analysis
 
 The purpose of this code was to gain experience in using pandas and plotly functions, namely the plotting, dataframe and slider functions.
 
